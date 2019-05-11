@@ -35,14 +35,8 @@ spec:
           volumeMounts:
             - name: elastic-persistent-storage-data
               mountPath: /data
-            - name: elastic-persistent-storage-config
-              mountPath: /config
-              subPath: elasticsearch.yml
       volumes:
         - name: elastic-persistent-storage-data
-          persistentVolumeClaim:
-            claimName: elastic-volumeclaim
-        - name: elastic-persistent-storage-config
           persistentVolumeClaim:
             claimName: elastic-volumeclaim
       nodeSelector:
