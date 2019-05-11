@@ -30,7 +30,7 @@ spec:
             name: elastic-db
             protocol: TCP
           - containerPort: 9300
-            name: elastic-transport
+            name: elastic-tp
             protocol: TCP
           volumeMounts:
             - name: elastic-persistent-storage-data
