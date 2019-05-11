@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic
+  labels:
+    app: elastic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elastic
+  template:
+    metadata:
+      labels:
+        app: elastic
+    spec:
+      containers:
+        - name: elastic
+          image: docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: discovery.type
+              value: single-node
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "200m"
+          ports:
+          - containerPort: 9200
+            name: elastic-db
+            protocol: TCP
+          - containerPort: 9300
+            name: elastic-transport
+            protocol: TCP
+          volumeMounts:
+            - name: elastic-persistent-storage-data
+              mountPath: /data
+            - name: elastic-persistent-storage-config
+              mountPath: /config
+              subPath: elasticsearch.yml
+      volumes:
+        - name: elastic-persistent-storage-data
+          persistentVolumeClaim:
+            claimName: elastic-volumeclaim
+        - name: elastic-persistent-storage-config
+          persistentVolumeClaim:
+            claimName: elastic-volumeclaim
+      nodeSelector:
+        tier: db

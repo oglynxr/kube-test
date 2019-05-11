@@ -1,0 +1,16 @@
+kubernetes
+    gcloud container clusters get-credentials <cluster-name> --zone <cluster-zone>
+
+
+    yaml samples: https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk
+
+
+
+GKE
+    create elastic search deployment to run on GKE
+    create random index
+    make requests against it
+    create mongo deployment to run on GKE
+    create basic .net app to run on GKE
+        connects to mongo and elastic
+    connect test app 
